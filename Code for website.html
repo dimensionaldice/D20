@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Origin of Dimensional Dice</title>
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Georgia', serif;
+  line-height: 1.7;
+  color: #f4f1e6;
+  overflow-x: hidden;
+  background: radial-gradient(ellipse at bottom, #0b0d17 0%, #000 100%);
+  position: relative;
+}
+
+/* Instagram icon */
+#instagram {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 40px;
+  height: 40px;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  overflow: hidden;
+  background: rgba(255,255,255,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+#instagram img {
+  width: 80%;
+  height: 80%;
+}
+#instagram:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 15px rgba(255, 105, 180, 0.7);
+}
+
+/* Nebula background with purple wisps */
+.nebula {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: -4;
+  background: 
+    radial-gradient(circle at 30% 30%, rgba(255,100,200,0.25), transparent 40%),
+    radial-gradient(circle at 70% 60%, rgba(100,200,255,0.25), transparent 50%),
+    radial-gradient(circle at 50% 80%, rgba(200,255,150,0.22), transparent 50%),
+    radial-gradient(circle at 20% 50%, rgba(180,120,220,0.12), transparent 60%), /* Purple wisps */
+    radial-gradient(circle at 80% 30%, rgba(200,140,255,0.10), transparent 50%);
+  animation: nebulaShift 80s linear infinite;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  will-change: transform, opacity;
+}
+@keyframes nebulaShift {
+  0% { transform: scale(1) translate(0,0); }
+  50% { transform: scale(1.05) translate(25px,-15px); }
+  100% { transform: scale(1) translate(0,0); }
+}
+
+/* Stars */
+.stars { 
+  position: fixed; 
+  top:0; 
+  left:0; 
+  width:100%; 
+  height:100%; 
+  z-index:-3; 
+  background:transparent; 
+  will-change: transform, opacity; 
+}
+.star { 
+  position:absolute; 
+  border-radius:50%; 
+  opacity:0.8; 
+  animation: twinkle 3s infinite alternate; 
+  transform: translate3d(0,0,0); 
+}
+@keyframes twinkle { from{opacity:0.3} to{opacity:1} }
+
+/* Cosmic particles */
+.particle { 
+  position:absolute; 
+  width:3px; 
+  height:3px; 
+  background:#f0d28b; 
+  border-radius:50%; 
+  opacity:0.5; 
+  animation: drift linear infinite; 
+  transform: translate3d(0,0,0); 
+  will-change: transform, opacity; 
+}
+@keyframes drift { from { transform: translate3d(0,0,0);} to { transform: translate3d(calc(800px*var(--dirX)), calc(-1200px*var(--dirY)),0); } }
+
+/* Planets */
+.planet {
+  position: fixed;
+  border-radius: 50%;
+  z-index: -3;
+  pointer-events: none;
+  background-size: cover;
+  background-repeat: no-repeat;
+  box-shadow: inset -5px -5px 15px rgba(0,0,0,0.4), 0 0 25px rgba(255,255,255,0.05);
+  animation: rotatePlanet linear infinite;
+}
+.planet1 { width: 120px; height: 120px; top: 15%; left: 20%; background: radial-gradient(circle at 30% 30%, #c1440e, #8b2c0a, #4e1a05); animation-duration: 120s; }
+.planet2 { width: 180px; height: 180px; top: 60%; left: 75%; background: radial-gradient(circle at 40% 40%, #0050a0, #00264d, #000a14); animation-duration: 180s; }
+.planet3 { width: 100px; height: 100px; top: 40%; left: 50%; background: radial-gradient(circle at 35% 35%, #228822, #0d330d, #041a04); animation-duration: 150s; }
+
+@keyframes rotatePlanet {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Header */
+header { text-align:center; padding:2rem; background: rgba(10,10,15,0.85); border-bottom:3px solid #d17736; }
+header img { max-width:180px; margin-bottom:1rem; }
+header h1 { font-size:2.5rem; color:#f0d28b; margin:0; text-shadow:0 0 15px rgba(240,210,139,0.8); }
+
+/* Main content */
+main { max-width:800px; margin:2rem auto; padding:1.5rem; background:rgba(20,20,30,0.75); border-radius:12px; box-shadow:0 0 20px rgba(0,0,0,0.6); }
+h2 { color:#d17736; margin-top:2rem; text-shadow:0 0 8px rgba(209,119,54,0.7); }
+.dice-list { margin:1rem 0; padding-left:1.2rem; }
+.dice-list li { margin:0.5rem 0; transition: all 0.3s ease; }
+.dice-list li:hover { color:#f0d28b; transform:scale(1.05); }
+
+/* Footer */
+footer { text-align:center; padding:2rem; margin-top:3rem; border-top:2px solid #333; font-size:0.9rem; color:#bbb; background:rgba(10,10,15,0.8); }
+
+/* Responsive */
+@media(max-width:768px){ 
+  main{padding:1rem; margin:1rem;} 
+  header h1{font-size:2rem;} 
+}
+</style>
+</head>
+<body>
+  <!-- Instagram -->
+  <a href="https://www.instagram.com/dimensional.dice" target="_blank" id="instagram">
+    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+  </a>
+
+  <div class="nebula"></div>
+  <div class="stars" id="stars"></div>
+
+  <!-- Planets -->
+  <div class="planet planet1"></div>
+  <div class="planet planet2"></div>
+  <div class="planet planet3"></div>
+
+  <!-- Particles -->
+  <div class="particle" style="top:80%; left:20%; animation-duration:60s;"></div>
+  <div class="particle" style="top:50%; left:70%; animation-duration:80s;"></div>
+  <div class="particle" style="top:90%; left:50%; animation-duration:70s;"></div>
+
+  <!-- Content -->
+  <header>
+    <img src="assets/logo.png" alt="Dimensional Dice Logo">
+    <h1>The Origin of Dimensional Dice</h1>
+  </header>
+  <main>
+    <p>Before Dimensional Dice became a name whispered at game tables, it was a legend of the Dragon of Fate, <strong>Kaelthoryn</strong>. Unlike his kin, Kaelthoryn hoarded not gold, but <em>possibilities</em>. To safeguard the infinite paths of destiny, he shattered a crystal of pure cosmic essence into seven shapes, each embodying a different aspect of story and chance.</p>
+
+    <h2>The Seven Dice of Fate</h2>
+    <ul class="dice-list">
+      <li><strong>D4 — The Spark of Beginnings.</strong> Every tale must start somewhere, sharp and radiant as the first strike of inspiration.</li>
+      <li><strong>D6 — The Balance of Struggle.</strong> Conflict and resolution, order and chaos, the even dice of mortal trials.</li>
+      <li><strong>D8 — The Blade of Conflict.</strong> Fate cuts sharpest in battle, where choices are swift and outcomes decisive.</li>
+      <li><strong>D10s — The Weavers of Fortune.</strong> One die for the mortal path, one for eternity, spinning probability into endless patterns.</li>
+      <li><strong>D12 — The March of Time.</strong> The cycles of days, months, and years, reminding adventurers that glory and ruin are bound to the ticking of the cosmos.</li>
+      <li><strong>D20 — The Gate of Destiny.</strong> The dragon’s heart itself, a die of ultimate chance, where triumph and disaster balance on a single roll.</li>
+      <li><strong>D100 — The Infinite Paths.</strong> Every roll hints at an uncharted story, countless destinies awaiting the brave.</li>
+    </ul>
+    <p>From these seven forms came stories, and from stories, worlds. The first artisans of <strong>Dimensional Dice</strong> claimed they had uncovered fragments of Kaelthoryn’s hoard and sought to share them with mortals—not as shackles of fate, but as tools of creation.</p>
+
+    <p>Thus the company was born, with the dragon encircling the eternal d20 as its sigil. For every set forged carries a spark of Kaelthoryn’s gift: the power to open doors, shape tales, and remind us that every roll is more than chance—it is the heartbeat of adventure.</p>
+  </main>
+
+  <footer>
+    &copy; 2025 Dimensional Dice. All rights reserved.
+  </footer>
+
+  <script>
+    // Generate random stars
+    const starContainer = document.getElementById('stars');
+    const colors = ['#fff','#ffe9c4','#d4fbff'];
+    const STAR_COUNT = 120;
+    for(let i=0;i<STAR_COUNT;i++){
+      const star=document.createElement('div');
+      star.className='star';
+      const size=Math.random()*2+1;
+      star.style.width=star.style.height=size+'px';
+      star.style.top=Math.random()*100+'%';
+      star.style.left=Math.random()*100+'%';
+      star.style.background=colors[Math.floor(Math.random()*colors.length)];
+      star.style.animationDuration=(Math.random()*3+2)+'s';
+      starContainer.appendChild(star);
+    }
+
+    // Particles random drift
+    document.querySelectorAll('.particle').forEach(p=>{
+      p.style.setProperty('--dirX', Math.random()*2-1);
+      p.style.setProperty('--dirY', Math.random());
+    });
+
+    // Parallax scroll
+    window.addEventListener('scroll',()=>{
+      const scroll=window.scrollY;
+      document.querySelectorAll('.stars').forEach(s=>{
+        s.style.transform=`translateY(${scroll*0.1}px)`;
+      });
+      document.querySelectorAll('.nebula').forEach(n=>{
+        n.style.transform=`translateY(${scroll*0.02}px)`;
+      });
+      document.querySelectorAll('.planet').forEach(p=>{
+        p.style.transform=`translateY(${scroll*0.015}px)`;
+      });
+    });
+  </script>
+</body>
+</html>
